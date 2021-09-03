@@ -4,7 +4,7 @@
     "main": "index.js",
     "scripts": {
         "test": "cross-env NODE_ENV=testing jest --watchAll --verbose --runInBand --silent",
-        "start": "node index.js",
+        "start": "node index.js NODE_ENV=development",
         "server": "nodemon index.js",
         "resetdb": "knex migrate:rollback && knex migrate:latest && knex seed:run"
     },

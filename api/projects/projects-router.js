@@ -60,18 +60,18 @@ router.delete("/:id", validateProjectId, async (req, res, next) => {
   }
 });
 
-router.get("/:id/actions", validateProjectId, (req,res,next) => {
-    Projects.get(req.params.id)
-    .then(projects => {
-       if(projects.actions){
-           res.status(200).json(projects.actions)
-       }
-       else{
-           res.status(200).json([])
-       }
-    })
-    .catch(next)
-})
+router.get("/:id/actions", validateProjectId, async (req, res, next) => {
+  try {
+    const projects = await Projects.getProjectActions(req.params.id);
+    if (projects) {
+      res.status(200).json(projects);
+    } else {
+      res.status(200).json({});
+    }
+  } catch (err) {
+    next(err);
+  }
+});
 
 // eslint-disable-next-line
 router.use((err, req, res, next) => {

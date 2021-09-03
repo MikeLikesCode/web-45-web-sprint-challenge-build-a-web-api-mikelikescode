@@ -66,7 +66,7 @@ router.get("/:id/actions", validateProjectId, async (req, res, next) => {
     if (projects) {
       res.status(200).json(projects);
     } else {
-      res.status(200).json({});
+      res.status(200).json([]);
     }
   } catch (err) {
     next(err);
